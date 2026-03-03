@@ -76,6 +76,24 @@ struct MyApp: App {
 
 That's it. A floating bubble appears on screen — tap it to browse captured requests.
 
+### SceneDelegate
+
+If your app uses `UISceneDelegate` instead of SwiftUI's `App` protocol:
+
+```swift
+import NetScope
+
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        #if DEBUG
+        NetScopeUniversal.startCapturing()
+        NetScopeController.shared.install()
+        #endif
+    }
+}
+```
+
 ### Register on a specific URLSessionConfiguration
 
 If you're using a library that creates its own `URLSessionConfiguration` (like Alamofire), register the interceptor directly on the configuration:
